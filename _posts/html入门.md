@@ -1,11 +1,10 @@
 ---
-title: html入门
-excerpt: 一篇给萌新看的html入门的文章
+title: html0
+excerpt: 本章为html入门
 categories:
-- 技术文章
+- 书籍
 tags:
 - html
-- 教学书
 ---
 
 ## 什么是HTML?
