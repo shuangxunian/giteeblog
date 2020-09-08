@@ -1,5 +1,5 @@
 ---
-title: CND原理详解
+title: CDN原理详解
 excerpt: 一篇关于CDN（Content Delivery Network，内容分发网络）的文章
 categories:
 - 技术文章
