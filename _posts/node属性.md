@@ -1,5 +1,5 @@
 ---
-title: node属性
+title: Node属性
 excerpt: 关于Node属性的文章
 categories:
 - 技术文章

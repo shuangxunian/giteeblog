@@ -1,6 +1,6 @@
 ---
-title: node方法
-excerpt: 关于Node属性的文章
+title: Node方法
+excerpt: 关于Node方法的文章
 categories:
 - 技术文章
 tags:
