@@ -170,7 +170,6 @@ let arr1 = [3,4,6];
 let arr2 = [...arr,...arr1];
 alert(arr2);
 ```
-
 ```javascript
 //json
 let json1={a:12,b:5,c:9};
@@ -271,3 +270,6 @@ arr.forEach((item,index)=>{
 JSON.stringify({a:12,b:5})      =>  '{"a":12,"b":5}'
 JSON.parse('{"a":12,"b":5}')    =>  {a:12,b:5}
 ```
+
+## 参考链接
+[【智能社】ES6精讲—主讲老师：石川（Blue）—高清版本](https://www.bilibili.com/video/BV1wt411t7hg)
