@@ -125,7 +125,7 @@ Git是分布式版本控制系统，同一个Git仓库，可以分布到不同�
 注意把Git库的地址换成你自己的，然后进入second目录看看，已经有README.md文件了：
 ![](https://api2.mubu.com/v3/document_image/0aa02e0f-71c5-45bf-9541-91d201a4b4e6-3807603.jpg)
 如果有多个人协作开发，那么每个人各自从远程克隆一份就可以了。
-GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
+GitHub给出的地址不止一个，还可以用 *https://github.com/YuelinWang/wyl_wheel.git* 这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
 使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
 
 ## 可能会遇到的问题
@@ -147,4 +147,4 @@ Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一�
 如果你实在担心有人冒充GitHub服务器，输入yes前可以对照GitHub的RSA Key的指纹信息是否与SSH连接给出的一致。
 
 ## 后记
-最后再强调下，这里写的这点知识只能作为自己简单使用，万万不可认为自己已熟悉git，此文整理自自己原来整理的[Git](https://mubu.com/docrDFpTiS_c0)，同时有和此文相关的[视频](https://www.bilibili.com/video/BV1rp4y1C7n1)，童鞋们可以移步看一下~
+再强调下，这里写的这点知识只能作为自己简单使用，万万不可认为自己已熟悉git，此文整理自自己原来整理的[Git](https://mubu.com/docrDFpTiS_c0)，同时有和此文相关的[视频](https://www.bilibili.com/video/BV1rp4y1C7n1)，童鞋们可以移步看一下，最后推荐一下我的[个人github](https://github.com/YuelinWang)，欢迎follow~
