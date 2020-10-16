@@ -15,6 +15,7 @@ tags:
 5. 将布局绘制(paint)在屏幕上，显示出整个页面。
 
 第四步和第五步是最耗时的部分，这两步合起来，就是我们通常所说的渲染。
+
 ![](https://api2.mubu.com/v3/document_image/b12c074a-6470-45e9-8b5e-e6010610d81a-3807603.jpg)
 
 ## 渲染
@@ -206,13 +207,17 @@ GPU 加速通常包括以下几个部分：Canvas2D，布局合成, CSS3转换�
 
 ## 如何在浏览器中查看页面渲染时间
 1. 打开开发者工具：点击 Performance 左侧有个小圆点 点击刷新页面会录制整个页面加载出来 时间的分配情况。如下图
+
 ![](https://api2.mubu.com/v3/document_image/0cac5adc-1264-48e2-afd3-6c1c1ffc32bf-3807603.jpg)
+
 - 蓝色: 网络通信和HTML解析
 - 黄色: JavaScript执行
 - 紫色: 样式计算和布局，即重排
 - 绿色: 重绘
 2. 点击 Event Log：单独勾选 Loading 项会显示 html 和 css 加载时间。如下图：
+
 ![](https://api2.mubu.com/v3/document_image/cfa93787-75a5-4d8c-8022-7d4acb3f5562-3807603.jpg)
+
 3. 解析完 DOM+CSSOM 之后会生成一个渲染树 Render Tree，就是 DOM 和 CSSOM 的一一对应关系。
 4. 通过渲染树中在屏幕上“画”出的所有节点，称为渲染。
 
