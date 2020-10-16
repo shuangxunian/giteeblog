@@ -25,7 +25,7 @@ tags:
 
 ## 常见跨域场景
 
-![]()
+![](https://api2.mubu.com/v3/document_image/3c4749c4-5f69-40c2-984e-10089b94b739-3807603.jpg)
 
 ## 跨域解决方案
 1. 通过jsonp跨域
