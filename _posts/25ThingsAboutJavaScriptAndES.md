@@ -76,7 +76,7 @@ console.log(da1);
 3. 如果没有指定一个构造函数方法constructor方法，就会使用一个默认的构造函数
 
 ## 类的属性Setter和Getter
-这里只是简单介绍，详细请移步[关于js中的get、set方法]()
+这里只是简单介绍，详细请移步[关于js中的get、set方法](https://shuangxunian.gitee.io/2020/10/17/aboutGetAndSetMethodsInJS/)
 ```javascript
 var daObj = {
  get val() {
@@ -161,7 +161,7 @@ class Da {
 ```
 
 ## 静态方法
-这里只是简单介绍，详细请移步[静态属性和静态方法]()
+这里只是简单介绍，详细请移步[静态属性和静态方法](https://shuangxunian.gitee.io/2020/10/17/staticPropertiesAndStaticMethods/)
 在es5中实现的静态方法：
 ```javascript
 let Da = function (type) {
