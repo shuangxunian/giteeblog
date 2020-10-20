@@ -1,5 +1,5 @@
 ---
-title: JavaScript与ES的25个知识点
+title: 一道控制并行数的题
 excerpt: 如题目~
 categories:
 - 技术文章
