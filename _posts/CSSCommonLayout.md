@@ -415,7 +415,15 @@ grid-row 是 grid-row-start 和 grid-row-end 的简写。grid-column 是 grid-co
 
 ### 合并单元行与合并单元列
 这个就和 excel 中的合并单元行/列是相同的（这个需要设置在 grid item 中）
-
+```css
+.item1{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-row-end: 4;
+}
+```
 
 
 
