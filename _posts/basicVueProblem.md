@@ -4,9 +4,7 @@ excerpt: 此篇是Vue3.0以下的高频面试题，3.0的内容还不是很充�
 categories:
 - 技术文章
 tags:
-- js
 - vue
-- 面试
 ---
 
 ## 前言
@@ -23,7 +21,8 @@ tags:
 3. 把2所记录的差异应用到步骤1所构建的真正的DOM树上，视图就更新了。
 
 ## 说一下 MVVM
-MVVM是双向数据绑定
+MVC是后端的分层开发概念；
+MVVM是前端视图层的概念，主要关注于视图层分离。MVVM把前端的视图层分为了三部分：Model,View,VM ViewModel
 - M: Model 数据层
 - V: View 视图层
 - VM: ViewModel 视图层和数据层中间的桥，视图层和数据层通信的桥梁
@@ -94,40 +93,123 @@ vue部分源码如下：
 
 // oldCh 是一个旧虚拟节点数组
 if (isUndef(oldKeyToIdx)) {
-  oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
+    oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
 }
-if(isDef(newStartVnode.key)) {
-  // map 方式获取
-  idxInOld = oldKeyToIdx[newStartVnode.key]
+if (isDef(newStartVnode.key)) {
+    // map 方式获取
+    idxInOld = oldKeyToIdx[newStartVnode.key]
 } else {
-  // 遍历方式获取
-  idxInOld = findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
+    // 遍历方式获取
+    idxInOld = findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
 }
 ```
 创建map函数
 ```javascript
-function createKeyToOldIdx (children, beginIdx, endIdx) {
-  let i, key
-  const map = {}
-  for (i = beginIdx; i <= endIdx; ++i) {
-    key = children[i].key
-    if (isDef(key)) map[key] = i
-  }
-  return map
+function createKeyToOldIdx(children, beginIdx, endIdx) {
+    let i, key
+    const map = {}
+    for (i = beginIdx; i <= endIdx; ++i) {
+        key = children[i].key
+        if (isDef(key)) map[key] = i
+    }
+    return map
 }
 ```
 遍历寻找
 ```javascript
 // sameVnode 是对比新旧节点是否相同的函数
- function findIdxInOld (node, oldCh, start, end) {
+function findIdxInOld(node, oldCh, start, end) {
     for (let i = start; i < end; i++) {
-      const c = oldCh[i]
-      
-      if (isDef(c) && sameVnode(node, c)) return i
+        const c = oldCh[i]
+
+        if (isDef(c) && sameVnode(node, c)) return i
     }
 }
 ```
 
+## Vue基本代码结构
+```javascript
+const vm = new Vue({
+    el: '#app', //所有的挂载元素会被 Vue 生成的 DOM 替换
+    data: {}, //this -> window
+    methods: {}, //this -> vm
+    //注意，不应该使用箭头函数来定义 method 函数 ,this将不再指向vm实例
+    props: {}, // 可以是数组或对象类型，用于接收来自父组件的数据
+    //对象允许配置高级选项，如类型检测、自定义验证和设置默认值
+    watch: {}, //this -> vm
+    computed: {},
+    render() {},
+    // 声明周期钩子函数
+})
+```
+当一个Vue实例被创建时，它将data对象中的所有的property加入到Vue的响应式系统中。当这些property的值发生改变时，视图将会产生 响应，即匹配更新为新的值。
+例外：
+- Vue实例外部新增的属性改变时不会更新视图。
+- Object.freeze()，会阻止修改现有的property，响应系统无法追踪其变化。
+
+实例属性和方法：
+- 访问el属性：vm.$el,`document.getElemnetById(‘app’)``;
+- 访问data属性：vm.$data
+- 以_或$开头的property不会被Vue实例代理，因为它们可能和Vue内置的property、API方法冲突。你可以使用例如vm.$data._property的方式访问这些property。
+- data._property的方式访问这些property。
+- 访问data中定义的变量：vm.a,vm.$data.a
+- 访问methods中的方法：vm.方法名()
+- 访问watch方法：vm.$watch()
+
+不要在选项property或回调上使用箭头函数,this将不会指向Vue实例 比如created: () => console.log(this.a)或vm.$watch('a', newValue => this.myMethod())。
+因为箭头函数并没有this，this会作为变量一直向上级词法作用域查找，直至找到为止，经常导致Uncaught TypeError: Cannot read property of undefined或Uncaught TypeError: this.myMethod is not a function之类的错误。
+
+## Vue指令
+**插入数据：**
+- 插值表达式相当于占位符，不会清空元素中的其他内容。直接写在标签中。会将html标签作为文本显示。
+- v-text会覆盖元素中原本的内容。写在开始标签中，以属性的形式存在。会将html标签作为文本显示。
+- v-html（innerHTML）会覆盖元素中原本的内容，会将数据解析成html标签。
+
+## Vue组件
+**组件配置对象和vue实例的区别**
+- 组件配置对象没有el，组件模板定义在template中；
+- 组件配置对象中data是函数，该函数返回的对象作为数据。
+
+**创建组件模板**
+方法一
+```javascript
+var com = Vue.extend({
+    //通过template属性 指定组件要展示的html结构
+    template: '<h3>这是使用Vue.extend搭建的全局组件</h3>'
+})
+```
+方法二：使用对象创建模板
+```javascript
+{
+    template: '<h3>这是使用Vue.extend搭建的全局组件-com3</h3>'
+}
+```
+方法三
+```html
+<template id="tmpl"> 写在受控区域外面
+    ......
+</template> 
+
+{ template:'#tmpl'  }
+```
+**组件中的data是一个函数的原因**
+- 多次使用该组件，如果修改其中一个中的数据，另一个也会改变。
+- 写成函数的形式，每次调用函数，返回一个新的对象
+
+**ref属性**
+- 获取dom元素/组件：标签上添加ref属性，this.$refs.ref属性值获取该dom元素/组件。
+- this.$refs.ref属性值.变量名获取组件中的数据
+- this.$refs.ref属性值.方法名()获取组件中的方法
+- $parent 和 $children 获取 父/子组件的数据和方法
+- this.$parent获取父组件
+- $children由于子组件的个数不确定 返回的是一个数组 ,不是对象
+- this.$children[0]获取第一个子组件
+
+作用域插槽：父组件替换插槽的标签，内容由子组件决定。
+编译的作用域：自身的数据在自身模板template标签中生效
+插槽上添加 属性绑定：data=’子组件中的数据’
+父组件通过template标签，添加slot-scope=’slot’ slot-scope属性接收子组件中的数据slot.data
+template标签中的html结构替换slot插槽中的默认html结构。
 
 
 
