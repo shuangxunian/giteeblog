@@ -281,10 +281,75 @@ vue兄弟组件之间的传值：
 - vnode： Vue编译生成的虚拟节点。移步 VNode API 来了解更多详情。
 - oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
 
+## Vue的生命周期
+一个组件从开始到最后消亡所经历的各种状态，就是一个组件的生命周期：
+- beforeCreate()
+    说明：在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用
+    注意：此时，无法获取 data中的数据、methods中的方法
+- created()
+    说明：这是一个常用的生命周期，可以调用methods中的方法、改变data中的数据
+- beforeMounted()
+    说明：在挂载开始之前被调用,此时无法获取到el中的DOM元素
+- mounted()
+    说明：此时，vue实例已经挂载到页面中，可以获取到el中的DOM元素，进行DOM操作
+- beforeUpdated()
+    说明：数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
+    注意：此处获取的数据是更新后的数据，但是获取页面中的DOM元素是更新之前的
+- updated()
+    说明：组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作
+- beforeDestroy()
+    说明：实例销毁之前调用。在这一步，实例仍然完全可用。
+    使用场景：实例销毁之前，执行清理任务，比如：清除定时器等
+- destroyed()
+    说明：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
 
+## Vue父子组件生命周期执行顺序
+- 加载渲染过程
+    父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount->子mounted->父mounted
+- 子组件更新过程
+    父beforeUpdate->子beforeUpdate->子updated->父updated
+- 父组件更新过程
+    父beforeUpdate->父updated
+- 销毁过程
+    父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
 
+## Vuex是什么？怎么使用？那种功能场景使用它
+只要来读取的状态集中放在store中；改变状态的方式就是提交mutations。这是个同步的实物；异步逻辑应该封装中action中。
+- state:Vuex 使用单一状态树，既每个应用将仅仅包含一个store实例，单单一状态树和模块化并不冲突。存放的数据状态，不可以直接修改里面的数据。可以通过this.$store.state调用state中的参数。
+- mutations:mutations定义的方法动态修改Vuex的store中的状态或数据。Mutatison中必须是同步函数。可以通过this.$store.commit('increment',args)来调用并更改state中的参数状态
+- getters:类似vue的计算属性，主要用来过滤一些数据。
+- action:action可以理解为通过mutations里面处理数据的方法变成可异步的处理数据的方法，简单的说就是异步操作数据。通过this.$store.dispatch('increment')来调用action方法。Action提交的是mutation，而不是直接改变装填，action可以包含异步操作 Modeules:项目特别复杂的时候，可以让每一个模块拥有自己的state，mutation，action，getters，使得结构非常清晰，方便管理
 
+## Vuex中的数据流向：
+1. vue组件先调用dispatch 来触发Actions做些异步处理或批量的同步操作，紧接着Actions通过提交commit来调用Mutations , Mutations 中放的是一个一个同步的对state的修改,只有通过mutations才能改变公用数据的值。最后通过this.$store.state.id的方法将值映射到页面上。
+2. 如果逻辑简单，vue 组件也可以略过actions, 让组件直接调用mutations来修改state的公用数据的值
 
+## vue-router的概念与使用：
+vue-router路由管理器
+vue router和vue.js的核心深度集成，可以方便的用于spa的应用程序开发
+它的功能有：
+- 支持HTML5 history模式，和hash模式；支持嵌套路由；支持路由参数，支持编程式路由，支持命名路由。
+- 路由的进阶，导航守卫，路由元信息，过渡效果，数据获取，滚动行为，路由懒加载。
+
+## vue-router的基本使用
+基本使用步骤：
+1. 引入相关的库文件
+    ```html
+    <script src="./lib/vue-routerxxx.js"></script>
+    ```
+2. 添加路由连接
+    ```html
+    <router-link to="/user">User</router-link>
+    ```
+3. 添加路由填充位
+    ```html
+    <router-view></router-view>
+    ```
+4. 定义路由组
+    ```javascript
+    var User = {template: '<div>user</div>'}
+    ```
+5. 配置路由规则并创建路由实例，
 
 ## 后记
 这些问题我都会写文章补上，也欢迎大家给我提供我这里没有的问题哦~
