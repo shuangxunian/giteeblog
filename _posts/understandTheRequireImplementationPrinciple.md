@@ -41,7 +41,7 @@ tags:
 require 源码并不复杂，这里采用的是边看源码边手写的方式讲解(我们最终实现的require 是简易版本，一些源码提到，但是简易版本不会实现)，实现 require 其实就是实现整个 Node.js 的模块加载机制，Node.js 的模块加载机制总结下来一共八步。
 
 ### 1.基础准备阶段
-Node.js 模块加载的主流程都在 Module 类中，在源码的https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L150 中进行了基础 Module 类定义，这个构造函数中的内容主要做一些值的初始化，我们自己对照着实现下，为了和源码有一个区别，本文使用 KoalaModule 命名。
+Node.js 模块加载的主流程都在 Module 类中，在源码的 https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L150 中进行了基础 Module 类定义，这个构造函数中的内容主要做一些值的初始化，我们自己对照着实现下，为了和源码有一个区别，本文使用 KoalaModule 命名。
 ```javascript
 function KoalaModule(id = '') {
     this.id = id;       // 这个id其实就是我们require的路径
@@ -60,7 +60,7 @@ Module.prototype.require = function(id) {
     return Module._load(id, this, /* isMain */ false);
 };
 ```
-在源码中你会发现又调用了_load函数，找到源码中的 _load 函数，(源码位置：https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L724)下面的所有步骤都是在这个函数中完成调用和 return的，实现简易版_load函数。
+在源码中你会发现又调用了_load函数，找到源码中的 _load 函数，(源码位置：https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L724) 下面的所有步骤都是在这个函数中完成调用和 return的，实现简易版_load函数。
 ```javascript
 KoalaModule._load = function (request) {    // request是我们传入的路劲参数
 // 2.路径分析并定位到文件
@@ -263,7 +263,7 @@ KoalaModule.prototype.load = function (filename) {
 ```
 获取到扩展名之后，根据不通的扩展名去执行不同的扩展名函数，源码中支持的扩展名有.js,.json,.node;
 1. 加载.js
-    定位到加载 .js 的源码位置(https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1092)
+    定位到加载 .js 的源码位置 (https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1092)
     我们自己实现一下执行.js代码。
     ```javascript
     KoalaModule._extensions['.js'] = function (module, filename) {
@@ -271,7 +271,7 @@ KoalaModule.prototype.load = function (filename) {
         module._compile(content, filename);
     }
     ```
-    KoalaModule._extensions 中 _compile 函数的执行。找到对应的源码位置(https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1037)，源码中这里还使用 proxy，我们进行一下简单实现。
+    KoalaModule._extensions 中 _compile 函数的执行。找到对应的源码位置 (https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1037) ，源码中这里还使用 proxy，我们进行一下简单实现。
     ```javascript
     KoalaModule.wrapper = [
     '(function (exports, require, module, __filename, __dirname) { ',
@@ -314,7 +314,7 @@ KoalaModule.prototype.load = function (filename) {
 
     以上两点也是我们能在 JS 模块文件里面直接使用这几个变量的原因。
 2. 加载 .json
-    加载 .json 文件比较简单，直接使用 JSONParse就可以，定位到源码位置(https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1117),注意这里不要忘记异常抛出 我们简单实现下：
+    加载 .json 文件比较简单，直接使用 JSONParse就可以，定位到源码位置 (https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L1117) ，注意这里不要忘记异常抛出 我们简单实现下：
     ```javascript
     KoalaModule._extensions['.json'] = function (module, filename) {
         const content = fs.readFileSync(filename, 'utf8');
