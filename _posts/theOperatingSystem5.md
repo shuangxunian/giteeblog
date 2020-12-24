@@ -2,7 +2,7 @@
 title: 操作系统期末考试——5
 excerpt: 本文涉及到文件管理
 categories:
-- 书籍
+- 考试
 tags:
 - 操作系统
 - 考试

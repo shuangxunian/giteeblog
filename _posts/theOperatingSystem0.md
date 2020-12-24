@@ -2,7 +2,7 @@
 title: 操作系统期末考试——0
 excerpt: 本文涉及到操作系统引论、进程管理
 categories:
-- 书籍
+- 考试
 tags:
 - 操作系统
 - 考试

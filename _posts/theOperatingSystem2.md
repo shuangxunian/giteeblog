@@ -2,7 +2,7 @@
 title: 操作系统期末考试——2
 excerpt: 本文涉及到存储器管理
 categories:
-- 书籍
+- 考试
 tags:
 - 操作系统
 - 考试

@@ -2,7 +2,7 @@
 title: 软件工程期末考试
 excerpt: 此文章为今天上课老师讲的内容~
 categories:
-- 其他
+- 考试
 tags:
 - 软件工程
 - 考试
