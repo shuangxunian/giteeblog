@@ -9,6 +9,8 @@ tags:
 
 这篇是所有文章的目录哦~
 
+- [深入浅出浏览器渲染原理](https://shuangxunian.gitee.io/2020/12/26/getToTheBottomOfBrowserRendering/)
+- [vue双向数据绑定原理](https://shuangxunian.gitee.io/2020/12/25/VueBidirectionalDataBindingPrinciple/)
 - [HTTPS的工作原理](https://shuangxunian.gitee.io/2020/12/24/HTTPSWorksWithTheTCPHandshakeMechanism/)
 - [超详细的DOM操作](https://shuangxunian.gitee.io/2020/12/24/operationDOM/)
 - [ACM-ICPC 2020 线下新生选拔赛第一场](https://shuangxunian.gitee.io/2020/12/03/SAUACMICPCTheFirstSessionOfOfflineFreshmanSelection/)
