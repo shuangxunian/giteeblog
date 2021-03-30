@@ -21,7 +21,7 @@ upload上传是前端开发很常用的一个功能，在Vue开发中常用的El
 这个基本不用说，:action是执行上传动作的后台接口，el-button是触发上传的按钮。
 
 ## 上传文件数量
-首先是设置是否可以同时选中多个文件上传，这个也是<input type='file'>的属性，添加multiple即可。另外el-upload组件提供了:limit属性来设置最多可以上传的文件数量，超出此数量后选择的文件是不会被上传的。:on-exceed绑定的方法则是处理超出数量后的动作。代码如下：
+首先是设置是否可以同时选中多个文件上传，这个也是&lt;input type='file'&gt;的属性，添加multiple即可。另外el-upload组件提供了:limit属性来设置最多可以上传的文件数量，超出此数量后选择的文件是不会被上传的。:on-exceed绑定的方法则是处理超出数量后的动作。代码如下：
 ```html
 <el-upload 
     :action="uploadActionUrl"
@@ -33,7 +33,7 @@ upload上传是前端开发很常用的一个功能，在Vue开发中常用的El
 ```
 
 ## 上传格式及大小限制
-如果需要限制上传文件的格式，需要添加accept属性，这个是直接使用<input type='file'>一样的属性了，accept属性的值可以是accept="image/gif, image/jpeg, text/plain, application/pdf"等等。文件格式的提示，则可以使用slot。代码如下：
+如果需要限制上传文件的格式，需要添加accept属性，这个是直接使用&lt;input type='file'&gt;一样的属性了，accept属性的值可以是accept="image/gif, image/jpeg, text/plain, application/pdf"等等。文件格式的提示，则可以使用slot。代码如下：
 ```html
 <el-upload 
     :action="uploadActionUrl"
